@@ -16,6 +16,7 @@
 	-webkit-box-shadow:0px 0px 8px #333333;
 	-moz-box-shadow:0px 0px 8px #333333;
 	font-family:"微软雅黑";
+	font-size:xx-small;
 }
 .navigation > div{
 	margin:0 auto;
@@ -58,7 +59,7 @@
 	<div>
 		<span class="icon"></span>
 		<span class="com">www.jet.com 喷气航模论坛</span>
-		<span class="portrait"><img alt="" src=""></span>
+		<span class="portrait"><img alt="" src="${BASE_URL }/jet/image/portrait/skull39.png"></span>
 		<span class="nickName">jeff1311</span>
 	</div>
 </div>
