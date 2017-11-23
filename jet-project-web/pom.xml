@@ -44,7 +44,7 @@
   	
   </dependencies>
   
-  <!-- <build>
+  <build>
   	<plugins>
   		<plugin>
             <groupId>org.mybatis.generator</groupId>
@@ -58,12 +58,12 @@
                 </dependency>
             </dependencies>
             <configuration>
-                 配置文件的路径
+                 <!-- 配置文件的路径 -->
                  <configurationFile>src/main/resources/GeneratorConfig.xml</configurationFile> 
                 <overwrite>true</overwrite>
             </configuration>
         </plugin>
   	</plugins>
-  </build> -->
+  </build>
   
 </project>
