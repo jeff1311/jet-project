@@ -10,7 +10,8 @@
 	padding:0;
 	width:100%;
 	height:45px;
-	background:#3e3e3e;
+	background:#24292e;
+	/* background:rgba(36,41,46,0.9); */
 	color:white;
 	box-shadow:0px 0px 8px #333333;/* 水平位移 垂直位移 模糊半径 */
 	-webkit-box-shadow:0px 0px 8px #333333;
