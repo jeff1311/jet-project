@@ -18,7 +18,7 @@ public class IndexController {
 	public ModelAndView index(){
 		ModelAndView mv = new ModelAndView("index");
 		UserInfo userInfo = userInfoService.getUserInfoById(1);
-		mv.addObject("userInfo", userInfo.toString());
+		//mv.addObject("userInfo", userInfo.toString());
 		return mv;
 	}
 	
