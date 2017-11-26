@@ -6,7 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>welcome to jet</title>
-<link rel="stylesheet" type="text/css" href="WEB-INF/css/common/animate.min.css">
 <style type="text/css">
 .body{
 	margin:0 auto;

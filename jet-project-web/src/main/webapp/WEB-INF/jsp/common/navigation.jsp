@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
 <style type="text/css">
 .navigation{
 	margin:0 auto;
@@ -82,16 +83,27 @@
 }
 .blue{
 	/* background:#0088cc; */
-	background:linear-gradient(0deg,#02486b,#0088cc);
-}
-#login:hover{
-	background:#28a745;
+	/*background:linear-gradient(0deg,#02486b,#0088cc);*/
 }
 #register:hover{
-	background:#0088cc;
+	background:linear-gradient(0deg,#02486b,#0088cc);
+}
+.login_input{
+	margin-left:4%;
+	margin-top:4%;
+	width:90%;
+	height:40px;
+	font-family:"微软雅黑";
+	padding-left:8px;
+	border:none;
+	border-radius:1px;
+	background:#e8e8e8;
+	outline: none;
+	-webkit-appearance: none;
 }
 </style>
 </head>
+
 <div class="navigation">
 	<div>
 		<span class="icon"></span>
@@ -103,10 +115,36 @@
 					<span class="nickName">jeff1311</span>
 				</c:when>
 				<c:otherwise>
-					<div id="login" class="button f_left green">登录</div><div id="register" class="button f_left blue">注册</div>
+					<div id="login" class="button f_left green">登录</div>
+					<div id="register" class="button f_left blue">注册</div>
 				</c:otherwise>
 			</c:choose>
 		</span>
 	</div>
 </div>
+<script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
+<script type="text/javascript">
+var login = "";
+	login += "<form class=\"\">\n";
+	login += "	<input type=\"text\" placeholder=\"邮箱\" class=\"login_input\">\n";
+	login += "	<input type=\"password\" placeholder=\"密码\" class=\"login_input\">\n";
+	login += "<\/form>\n";
+$('#login').click(function(){
+	//自定页
+	layer.open({
+	  type: 1,
+	  title: "登陆",
+	  area: ['400px', '250px'],
+	  skin: 'layui-layer-demo', //样式类名
+	  closeBtn: 0, //不显示关闭按钮
+	  anim: 2,
+	  shadeClose: true, //开启遮罩关闭
+	  content: login	
+	});
+})
+$('#register').click(function(){	
+	window.location="html/register.html"; 
+})
+</script>
 </html>
