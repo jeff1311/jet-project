@@ -8,44 +8,64 @@
 <link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
 <style type="text/css">
 .navigation{
+	position:fixed;
 	margin:0 auto;
 	padding:0;
 	width:100%;
-	height:45px;
-	background:#24292e;
-	/* background:rgba(36,41,46,0.9); */
-	color:white;
-	box-shadow:0px 0px 8px #333333;/* 水平位移 垂直位移 模糊半径 */
-	-webkit-box-shadow:0px 0px 8px #333333;
-	-moz-box-shadow:0px 0px 8px #333333;
+	height:50px;
+/*	background:#24292e;
+	background:rgba(36,41,46,0.9); */
+/* 	box-shadow:0px 0px 8px #333333;/* 水平位移 垂直位移 模糊半径 */
+/*	-webkit-box-shadow:0px 0px 8px #333333;
+	-moz-box-shadow:0px 0px 8px #333333; */
+	background:#ffffff;
+	color:#8a8a8a;
 	font-family:"微软雅黑";
 	font-size:xx-small;
 }
 .navigation > div{
 	margin:0 auto;
 	width:70%;
-	height:45px;
+	height:50px;
 }
 .icon{
 	float:left;
-	width:45px;
-	height:45px;
-	background:url(image/icon/ios-jet.png) no-repeat center;
+	width:50px;
+	height:50px;
+	background:url(image/icon/airplane64.png) no-repeat center;
 	background-size:100%;
 }
 .com{
-	height:45px;   
-  	line-height:45px;
+	float:left;
+	height:50px;   
+  	line-height:50px;
+}
+.message{
+	float:left;
+	margin-top:12.5px;
+	width:25px;
+	height:25px;
+	background:url(image/icon/message.png);
+	background-size:100%;
+}
+.message-tip{
+	float:left;
+	margin-top:2px;
+	margin-left:-17px;
+	width:30px;
+	height:30px;
+	background:url(image/icon/redpoint.png);
+	background-size:100%;
 }
 .nickName{
 	float:right;
 	margin-right:5px;
-	height:45px;
-	line-height:45px;
+	height:50px;
+	line-height:50px;
 }
 .portrait{
 	float:right;
-	margin-top:5px;
+	margin-top:7.5px;
 	width:35px;
 	height:35px;
 	border-radius:100%;
@@ -56,26 +76,22 @@
 	-webkit-box-shadow:0px 0px 8px #333333;
 	-moz-box-shadow:0px 0px 8px #333333;
 }
-.right{
+.f-right{
 	float:right;
-	height:45px;
-	line-height:45px;
+	height:50px;
+	line-height:50px;
 }
-.f_left{
+.font-link{
 	float:left;
-}
-.button{
-	margin:5px;
-	width:80px;
-	height:35px;
-	line-height:35px;
-	text-align:center;
-	border-radius:5px;
+	margin-right:10px;
 	cursor:pointer;
-	transition:1s;
-	-moz-transition:1s; /* Firefox 4 */
-	-webkit-transition:1s; /* Safari 和 Chrome */
-	-o-transition:1s; /* Opera */
+	transition:0.5s;
+	-moz-transition:0.5s; /* Firefox 4 */
+	-webkit-transition:0.5s; /* Safari 和 Chrome */
+	-o-transition:0.5s; /* Opera */
+}
+.font-link:HOVER{
+	color:#3c3c3c;
 }
 .green{
 	/* background:#28a745; */
@@ -84,9 +100,6 @@
 .blue{
 	/* background:#0088cc; */
 	/*background:linear-gradient(0deg,#02486b,#0088cc);*/
-}
-#register:hover{
-	background:linear-gradient(0deg,#02486b,#0088cc);
 }
 .login_input{
 	margin-left:4%;
@@ -98,8 +111,10 @@
 	border:none;
 	border-radius:1px;
 	background:#e8e8e8;
-	outline: none;
-	-webkit-appearance: none;
+	outline:none;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
 }
 </style>
 </head>
@@ -107,16 +122,18 @@
 <div class="navigation">
 	<div>
 		<span class="icon"></span>
-		<span class="com">www.jet.com 喷气航模论坛</span>
-		<span class="right">
+		<span class="com">www.jet.com</span>
+		<span class="message"></span><div class="message-tip"></div>
+		<span class="f-right">
 			<c:choose>
 				<c:when test="${!empty userInfo }">
 					<span class="portrait"><img alt="" src="${BASE_URL }/jet/image/portrait/skull39.png"></span>
 					<span class="nickName">jeff1311</span>
 				</c:when>
 				<c:otherwise>
-					<div id="login" class="button f_left green">登录</div>
-					<div id="register" class="button f_left blue">注册</div>
+					<div id="login" class="font-link">登录</div>
+					<div id="register" class="font-link">注册</div>
+					<a id="location" style="cursor:pointer;">锚点</a>
 				</c:otherwise>
 			</c:choose>
 		</span>
@@ -125,11 +142,10 @@
 <script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
 <script type="text/javascript">
-var login = "";
-	login += "<form class=\"\">\n";
-	login += "	<input type=\"text\" placeholder=\"邮箱\" class=\"login_input\">\n";
-	login += "	<input type=\"password\" placeholder=\"密码\" class=\"login_input\">\n";
-	login += "<\/form>\n";
+var login = ['<form action="">	',
+             '		<input type="text" placeholder="邮箱" class="login_input">',
+             '		<input type="password" placeholder="密码" class="login_input">',
+             '	</form>'].join("");
 $('#login').click(function(){
 	//自定页
 	layer.open({
@@ -145,6 +161,10 @@ $('#login').click(function(){
 })
 $('#register').click(function(){	
 	window.location="html/register.html"; 
+})
+
+$('#location').click(function(){	
+	$("html,body").animate({scrollTop: $("#bottom").offset().top}, 500);
 })
 </script>
 </html>

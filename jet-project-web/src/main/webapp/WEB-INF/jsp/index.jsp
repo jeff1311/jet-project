@@ -9,14 +9,14 @@
 <style type="text/css">
 .body{
 	margin:0 auto;
-	background:#ececec;
+	background:#f1f1f1;
 }
 .main{
 	margin:0 auto;
 	margin-top:30px;
 	margin-bottom:30px;
 	width:70%;
-	height:1000px;/* 100% */
+	height:5000px;/* 100% */
 	background:white;
 }
 .banner{
@@ -24,11 +24,11 @@
 	width:100%;
 	height:700px;
 	/* background:url(image/banner/f22.jpg) no-repeat fixed center; */
-	background:url(image/banner/f22.jpg) no-repeat center;
+/* 	background:url(image/banner/f22.jpg) no-repeat center; */
 	background-size:100%;
-	box-shadow:0px 0px 20px #333333 inset;/* 水平位移 垂直位移 模糊半径 */
-	-webkit-box-shadow:0px 0px 20px #333333 inset;
-	-moz-box-shadow:0px 0px 20px #333333 inset;
+/* 	box-shadow:0px 0px 20px #333333 inset;/* 水平位移 垂直位移 模糊半径 */
+/*	-webkit-box-shadow:0px 0px 20px #333333 inset;
+	-moz-box-shadow:0px 0px 20px #333333 inset; */
 }
 
 </style>
@@ -37,6 +37,6 @@
 	<%@ include file="./common/navigation.jsp" %>
 	<div class="banner"></div>
 	<div class="main"></div>
-	
+	<a id="bottom">asdfasdfaaa</a>
 </body>
 </html>
