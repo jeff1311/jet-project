@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jet.mapper.UserInfoMapper;
 import com.jet.pojo.UserInfo;
+import com.jet.pojo.common.ResultModel;
 
 @Service("registerService")
 public class RegisterServiceImpl implements IRegisterService {
@@ -17,38 +18,64 @@ public class RegisterServiceImpl implements IRegisterService {
 	IEmailSenderService emailSenderService;
 	
 	@Override
-	public int register(String email,String password) {
-		Integer result = 0;
-		UserInfo user = userInfoMapper.selectByEmail(email);
+	public ResultModel register(String nickName,String email,String password) {
+		ResultModel rm = new ResultModel();
+		UserInfo userI = userInfoMapper.selectByNickName(nickName);
+		if(userI!=null){
+			rm.setCode(3);
+			rm.setErrMsg("此昵称已被注册！");
+			return rm;
+		}
+		UserInfo userII = userInfoMapper.selectByEmail(email);
 		String emailMD5 = DigestUtils.md5Hex(email);
-		if(user==null){			
+		if(userII==null){			
 			try {
 				emailSenderService.send(email,emailMD5);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			UserInfo userInfo = new UserInfo();
+			userInfo.setNickName(nickName);
 			userInfo.setEmail(email);
 			userInfo.setEmailCode(emailMD5);
-			userInfo.setPassword(password);
+			userInfo.setPassword(DigestUtils.md5Hex(password));
 			userInfo.setDateInsert(new Date());
-			result = userInfoMapper.insertSelective(userInfo);
+			int result = userInfoMapper.insertSelective(userInfo);
+			if(result==1){
+				rm.setCode(1);
+			}else{
+				rm.setCode(0);
+				rm.setErrMsg("数据库异常！");
+			}
 		}else{
-			result = 2;//账号已存在
+			rm.setCode(2);
+			rm.setErrMsg("此邮箱已被注册！");
 		}
-		return result;
+		return rm;
 	}
 
 	@Override
-	public boolean authEmail(String email,String emailCode) {
-		boolean result = false;
+	public ResultModel authEmail(String email,String emailCode) {
+		ResultModel rm = new ResultModel();
 		if(email!=null&&emailCode!=null){
 			UserInfo userInfo = userInfoMapper.selectByEmailAndEmailcode(email, emailCode);
 			if(userInfo!=null){
-				result=true;
+				userInfo.setStatus(1);//账号已激活
+				userInfo.setEmailCode("");//清空
+				userInfo.setDateUpdate(new Date());
+				int updateResult = userInfoMapper.updateByPrimaryKeySelective(userInfo);
+				if(updateResult==1){
+					rm.setCode(1);
+				}else{
+					rm.setCode(0);
+					rm.setErrMsg("数据库异常！");
+				}
+			}else{
+				rm.setCode(0);
+				rm.setErrMsg("链接失效！");
 			}
 		}
-		return result;
+		return rm;
 	}
 
 }

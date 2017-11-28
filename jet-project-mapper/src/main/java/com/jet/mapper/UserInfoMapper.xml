@@ -25,6 +25,9 @@
     from user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByNickName" resultMap="BaseResultMap">
+  	select * from user_info where nick_name=#{nickName,jdbcType=VARCHAR}
+  </select>
   <select id="selectByEmail" resultMap="BaseResultMap">
   	select * from user_info where email=#{email,jdbcType=VARCHAR}
   </select>

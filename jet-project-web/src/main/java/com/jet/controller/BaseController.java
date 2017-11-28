@@ -9,8 +9,11 @@ import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jet.pojo.UserInfo;
+import com.jet.pojo.common.Constants;
 
 public class BaseController {
+	
+	public static final String baseUrl = Constants.urls.get("BASE_URL");
 	
 	/**
 	 * 获取当前登录用户信息
@@ -31,7 +34,7 @@ public class BaseController {
 	 * @param errMsg
 	 * @param info
 	 */
-	public <T> void returnInfo(HttpServletResponse response,String code,String errMsg,String infoName,T info){
+	public <T> void returnInfo(HttpServletResponse response,int code,String errMsg,String infoName,T info){
 		response.setContentType("text/html;charset=utf-8"); 
 		JSONObject obj=new JSONObject();
 		obj.put("code", code);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jet.pojo.common.ResultModel;
 import com.jet.service.IRegisterService;
 
 @Controller
@@ -24,19 +25,11 @@ public class RegisterController extends BaseController{
 	 */
 	@RequestMapping(value="/register/email",method=RequestMethod.POST)
 	public void register(HttpServletRequest request,HttpServletResponse response){
+		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		int result = registerService.register(email,password);
-		String code = "0";
-		String errMsg = "";
-		if(result==1){
-			code = "1";
-		}else if(result==2){
-			errMsg = "此邮箱已被注册！";
-		}else{
-			errMsg = "数据库异常！";
-		}
-		returnInfo(response, code, errMsg, null, null);
+		ResultModel result = registerService.register(nickName,email,password);
+		returnInfo(response, result.getCode(), result.getErrMsg(), null, null);
 	}
 	
 	/**
@@ -45,23 +38,15 @@ public class RegisterController extends BaseController{
 	 * @param response
 	 */
 	@RequestMapping(value="/register/authEmail",method=RequestMethod.GET)
-	public void authEmail(HttpServletRequest request,HttpServletResponse response){
+	public void authEmail(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		response.setContentType("text/html;charset=utf-8");
 		String email = request.getParameter("email");
 		String emailCode = request.getParameter("emailCode");
-		boolean result = registerService.authEmail(email,emailCode);
-		if(result){			
-			try {
-				response.sendRedirect("http://192.168.6.237:8888/jet/image/banner/f22.jpg");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		ResultModel rm = registerService.authEmail(email,emailCode);
+		if(rm.getCode()==1){			
+			response.sendRedirect(baseUrl+"/jet/image/banner/f22.jpg");
 		}else{			
-			try {
-				response.getWriter().print("油箱激活失败！");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			response.getWriter().print("<center><h1>"+rm.getErrMsg()+"</h1></center>");
 		}
 	}
 	

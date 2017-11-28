@@ -11,20 +11,22 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 
 import com.jet.pojo.EmailModel;
+import com.jet.pojo.common.Constants;
 
 @Service("emailSenderService")
 public class EmailSenderServiceImpl implements IEmailSenderService{
+	private static final String baseUrl = Constants.urls.get("BASE_URL");
 
     // 发件人的 邮箱 和 密码（替换为自己的邮箱和密码）
     // PS: 某些邮箱服务器为了增加邮箱本身密码的安全性，给 SMTP 客户端设置了独立密码（有的邮箱称为“授权码”）, 
     //     对于开启了独立密码的邮箱, 这里的邮箱密码必需使用这个独立密码（授权码）。
-	public static String myEmailNickName = "喷气航模网";
-    public static String myEmailAccount = "285079883@163.com";
-    public static String myEmailPassword = "7861420789";
+	private static final String myEmailNickName = "喷气航模网";
+	private static final String myEmailAccount = "285079883@163.com";
+	private static final String myEmailPassword = "7861420789";
 
     // 发件人邮箱的 SMTP 服务器地址, 必须准确, 不同邮件服务器地址不同, 一般(只是一般, 绝非绝对)格式为: smtp.xxx.com
     // 网易163邮箱的 SMTP 服务器地址为: smtp.163.com
-    public static String myEmailSMTPHost = "smtp.163.com";
+	private static final String myEmailSMTPHost = "smtp.163.com";
 	
     @Override
     public boolean send(String receiverEmail,String emailCode) throws Exception {
@@ -34,7 +36,7 @@ public class EmailSenderServiceImpl implements IEmailSenderService{
     	emailInfo.setReceiverEmail(receiverEmail);
     	emailInfo.setReceiverNickName("亲爱的模友");
     	emailInfo.setTitle("邮箱验证");
-    	emailInfo.setContenct("<a href=\"http://192.168.6.237:8888/jet/register/authEmail?email="+receiverEmail+"&emailCode="+emailCode+"\">点击此链接激活邮箱</a>");
+    	emailInfo.setContenct("<a href=\""+baseUrl+"/jet/register/authEmail?email="+receiverEmail+"&emailCode="+emailCode+"\">点击此链接激活邮箱</a>");
     	
     	// 1. 创建参数配置, 用于连接邮件服务器的参数配置
         Properties props = new Properties();                    // 参数配置

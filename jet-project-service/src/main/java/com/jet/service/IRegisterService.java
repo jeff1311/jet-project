@@ -1,6 +1,6 @@
 package com.jet.service;
 
-import com.jet.pojo.UserInfo;
+import com.jet.pojo.common.ResultModel;
 
 public interface IRegisterService {
 	
@@ -9,13 +9,13 @@ public interface IRegisterService {
 	 * @param userInfo
 	 * @return
 	 */
-	public abstract int register(String email,String password);
+	public abstract ResultModel register(String nickName,String email,String password);
 	
 	/**
 	 * 激活邮箱
 	 * @param userInfo
 	 * @return
 	 */
-	public abstract boolean authEmail(String email,String emailCode);
+	public abstract ResultModel authEmail(String email,String emailCode);
 	
 }

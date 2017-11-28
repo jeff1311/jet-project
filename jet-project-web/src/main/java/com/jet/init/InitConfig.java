@@ -5,17 +5,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.http.HttpSession;
+
+import com.jet.pojo.common.Constants;
 
 public class InitConfig implements ServletContextListener{
 
@@ -36,11 +38,14 @@ public class InitConfig implements ServletContextListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		Map<String,String> urls = new HashMap<String,String>();
 		Iterator<Entry<Object, Object>> proIterator = pro.entrySet().iterator();
 		while(proIterator.hasNext()){//读取配置信息set到当前应用域里面
 			Entry<Object, Object> next = proIterator.next();
 			application.setAttribute(next.getKey().toString(), next.getValue());
+			urls.put(next.getKey().toString(), next.getValue().toString());
 		}
+		Constants.urls=urls;
 		
 		final List<HttpSession> sessions = Collections.synchronizedList(new ArrayList<HttpSession>());
 		application.setAttribute("sessions", sessions);

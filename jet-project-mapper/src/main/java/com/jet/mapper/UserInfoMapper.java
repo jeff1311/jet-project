@@ -17,6 +17,8 @@ public interface UserInfoMapper {
 
     int updateByPrimaryKey(UserInfo record);
     
+    UserInfo selectByNickName(@Param("nickName")String nickName);
+    
     UserInfo selectByEmail(@Param("email")String email);
     
     UserInfo selectByEmailAndEmailcode(@Param("email")String email,@Param("emailCode")String emailCode);
