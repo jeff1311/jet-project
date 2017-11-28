@@ -27,9 +27,9 @@ CREATE TABLE `user_info` (
   `level` int(11) DEFAULT '0',
   `status` int(3) DEFAULT '0',
   `email_code` varchar(50) DEFAULT NULL,
-  `birth_day` date DEFAULT NULL,
-  `date_insert` date DEFAULT NULL,
-  `date_update` date DEFAULT NULL,
+  `birth_day` DATETIME DEFAULT NULL,
+  `date_insert` DATETIME DEFAULT NULL,
+  `date_update` DATETIME DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
