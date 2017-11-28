@@ -101,21 +101,21 @@
 		<form id="registerForm">
 			<div class="input-frame">
 				<div class="input-label">昵称：</div>			
-				<input type="text" name="nickName" placeholder="请输入昵称" class="input">
+				<input type="text" id="nickName" name="nickName" placeholder="请输入昵称" class="input">
 				<span class="input-tip-star">*</span>
 				<span class="input-tip" id="nickNameTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label">邮箱：</div>			
-				<input type="email" name="email" placeholder="请输入邮箱" class="input">
+				<input type="email" id="email" name="email" placeholder="请输入邮箱" class="input">
 				<span class="input-tip-star">*</span>
 				<span class="input-tip" id="emailTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label">密码：</div>			
-				<input type="password" name="password" placeholder="请输入密码" class="input">
+				<input type="password" id="password" name="password" placeholder="请输入密码" class="input">
 				<span class="input-tip-star">*</span>
-				<span class="input-tip" id="pwdTip"></span>
+				<span class="input-tip" id="passwordTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label"></div>
@@ -139,6 +139,9 @@ function getContextPath(){
 } 
 $('#register').click(function(){
 	var url=getContextPath();
+	if(!validate()){
+		return false;
+	}
 	$.ajax({
 		type:'post',
 		url:url+'/register/email',
@@ -158,5 +161,25 @@ $('#register').click(function(){
 		}
 	})
 })
+function validate(){
+	var nickName=$('#nickName');
+	var email=$('#email');
+	var password=$('#password');
+	if(nickName.val()==null||nickName.val()==''){
+		nickName.focus();
+		$('#nickNameTip').text("昵称不可为空！");
+		return false;
+	}
+	if(email.val()==null||email.val()==''){
+		email.focus();
+		$('#emailTip').text("邮箱不可为空！");
+		return false;
+	}
+	if(password.val()==null||password.val()==''){
+		password.focus();
+		$('#passwordTip').text("密码不可为空！");
+		return false;
+	}
+}
 </script>
 </html>
