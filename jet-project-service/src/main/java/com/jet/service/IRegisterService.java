@@ -9,7 +9,7 @@ public interface IRegisterService {
 	 * @param userInfo
 	 * @return
 	 */
-	public abstract int register(UserInfo userInfo);
+	public abstract int register(String email,String password);
 	
 	/**
 	 * 激活邮箱

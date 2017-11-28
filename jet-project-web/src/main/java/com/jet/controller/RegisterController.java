@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jet.service.IRegisterService;
 
 @Controller
-public class RegisterController {
+public class RegisterController extends BaseController{
 	@Autowired
 	IRegisterService registerService;
 	
@@ -20,9 +20,21 @@ public class RegisterController {
 	 * @param request
 	 * @param reponse
 	 */
-	@RequestMapping(value="",method=RequestMethod.POST)
+	@RequestMapping(value="/register/email",method=RequestMethod.POST)
 	public void register(HttpServletRequest request,HttpServletResponse response){
-		
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		int result = registerService.register(email,password);
+		String code = "0";
+		String errMsg = "";
+		if(result==1){
+			code = "1";
+		}else if(result==2){
+			errMsg = "此邮箱已被注册！";
+		}else{
+			errMsg = "数据库异常！";
+		}
+		returnInfo(response, code, errMsg, null, null);
 	}
 	
 	/**
@@ -30,7 +42,7 @@ public class RegisterController {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping(value="",method=RequestMethod.GET)
+	@RequestMapping(value="/register/authEmail",method=RequestMethod.GET)
 	public void authEmail(HttpServletRequest request,HttpServletResponse response){
 		
 	}

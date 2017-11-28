@@ -25,6 +25,9 @@
     from user_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByEmail" resultMap="BaseResultMap">
+  	select * from user_info where email=#{email,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user_info
     where id = #{id,jdbcType=INTEGER}

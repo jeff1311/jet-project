@@ -1,5 +1,8 @@
 package com.jet.service;
 
+import java.util.Date;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +17,24 @@ public class RegisterServiceImpl implements IRegisterService {
 	IEmailSenderService emailSenderService;
 	
 	@Override
-	public int register(UserInfo userInfo) {
-		try {
-			emailSenderService.send(userInfo.getEmail());
-		} catch (Exception e) {
-			e.printStackTrace();
+	public int register(String email,String password) {
+		Integer result = 0;
+		UserInfo user = userInfoMapper.selectByEmail(email);
+		if(user==null){			
+			try {
+				emailSenderService.send(email);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String emailMD5 = DigestUtils.md5Hex(email);
+			UserInfo userInfo = new UserInfo();
+			userInfo.setEmail(email);
+			userInfo.setEmailCode(emailMD5);
+			userInfo.setDateInsert(new Date());
+			result = userInfoMapper.insertSelective(userInfo);
+		}else{
+			result = 2;//账号已存在
 		}
-		int result = userInfoMapper.insertSelective(userInfo);
 		return result;
 	}
 

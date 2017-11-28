@@ -31,6 +31,7 @@ public class EmailSenderServiceImpl implements IEmailSenderService{
     	EmailModel emailInfo = new EmailModel();
     	emailInfo.setSenderEmail(myEmailAccount);
     	emailInfo.setSenderNickName(myEmailNickName);
+    	emailInfo.setReceiverEmail(receiverEmail);
     	emailInfo.setReceiverNickName("亲爱的模友");
     	emailInfo.setTitle("邮箱验证");
     	emailInfo.setContenct("<a href=\"https://www.baidu.com\">www.baidu.com</a>");

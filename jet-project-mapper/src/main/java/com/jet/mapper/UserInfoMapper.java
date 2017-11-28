@@ -1,5 +1,7 @@
 package com.jet.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jet.pojo.UserInfo;
 
 public interface UserInfoMapper {
@@ -14,4 +16,6 @@ public interface UserInfoMapper {
     int updateByPrimaryKeySelective(UserInfo record);
 
     int updateByPrimaryKey(UserInfo record);
+    
+    UserInfo selectByEmail(@Param("email")String email);
 }
