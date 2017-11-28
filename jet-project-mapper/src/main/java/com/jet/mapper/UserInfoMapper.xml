@@ -5,13 +5,19 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="cell_phone" property="cellPhone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="email_code" property="emailCode" jdbcType="VARCHAR" />
     <result column="birth_day" property="birthDay" jdbcType="DATE" />
-    <result column="date_insert" property="dateInsert" jdbcType="TIMESTAMP" />
-    <result column="date_update" property="dateUpdate" jdbcType="TIMESTAMP" />
+    <result column="date_insert" property="dateInsert" jdbcType="DATE" />
+    <result column="date_update" property="dateUpdate" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, nick_name, level, birth_day, date_insert, date_update
+    id, name, nick_name, password, cell_phone, email, level, status, email_code, birth_day, 
+    date_insert, date_update
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,11 +31,15 @@
   </delete>
   <insert id="insert" parameterType="com.jet.pojo.UserInfo" >
     insert into user_info (id, name, nick_name, 
-      level, birth_day, date_insert, 
-      date_update)
+      password, cell_phone, email, 
+      level, status, email_code, 
+      birth_day, date_insert, date_update
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
-      #{level,jdbcType=INTEGER}, #{birthDay,jdbcType=DATE}, #{dateInsert,jdbcType=TIMESTAMP}, 
-      #{dateUpdate,jdbcType=TIMESTAMP})
+      #{password,jdbcType=VARCHAR}, #{cellPhone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{emailCode,jdbcType=VARCHAR}, 
+      #{birthDay,jdbcType=DATE}, #{dateInsert,jdbcType=DATE}, #{dateUpdate,jdbcType=DATE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.jet.pojo.UserInfo" >
     insert into user_info
@@ -43,8 +53,23 @@
       <if test="nickName != null" >
         nick_name,
       </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="cellPhone != null" >
+        cell_phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
       <if test="level != null" >
         level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="emailCode != null" >
+        email_code,
       </if>
       <if test="birthDay != null" >
         birth_day,
@@ -66,17 +91,32 @@
       <if test="nickName != null" >
         #{nickName,jdbcType=VARCHAR},
       </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cellPhone != null" >
+        #{cellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
       <if test="level != null" >
         #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="emailCode != null" >
+        #{emailCode,jdbcType=VARCHAR},
       </if>
       <if test="birthDay != null" >
         #{birthDay,jdbcType=DATE},
       </if>
       <if test="dateInsert != null" >
-        #{dateInsert,jdbcType=TIMESTAMP},
+        #{dateInsert,jdbcType=DATE},
       </if>
       <if test="dateUpdate != null" >
-        #{dateUpdate,jdbcType=TIMESTAMP},
+        #{dateUpdate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -89,17 +129,32 @@
       <if test="nickName != null" >
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="cellPhone != null" >
+        cell_phone = #{cellPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
       <if test="level != null" >
         level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="emailCode != null" >
+        email_code = #{emailCode,jdbcType=VARCHAR},
       </if>
       <if test="birthDay != null" >
         birth_day = #{birthDay,jdbcType=DATE},
       </if>
       <if test="dateInsert != null" >
-        date_insert = #{dateInsert,jdbcType=TIMESTAMP},
+        date_insert = #{dateInsert,jdbcType=DATE},
       </if>
       <if test="dateUpdate != null" >
-        date_update = #{dateUpdate,jdbcType=TIMESTAMP},
+        date_update = #{dateUpdate,jdbcType=DATE},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -108,10 +163,15 @@
     update user_info
     set name = #{name,jdbcType=VARCHAR},
       nick_name = #{nickName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      cell_phone = #{cellPhone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
       level = #{level,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      email_code = #{emailCode,jdbcType=VARCHAR},
       birth_day = #{birthDay,jdbcType=DATE},
-      date_insert = #{dateInsert,jdbcType=TIMESTAMP},
-      date_update = #{dateUpdate,jdbcType=TIMESTAMP}
+      date_insert = #{dateInsert,jdbcType=DATE},
+      date_update = #{dateUpdate,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
