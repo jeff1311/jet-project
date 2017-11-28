@@ -30,6 +30,7 @@ public class RegisterServiceImpl implements IRegisterService {
 			UserInfo userInfo = new UserInfo();
 			userInfo.setEmail(email);
 			userInfo.setEmailCode(emailMD5);
+			userInfo.setPassword(password);
 			userInfo.setDateInsert(new Date());
 			result = userInfoMapper.insertSelective(userInfo);
 		}else{
