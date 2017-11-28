@@ -16,6 +16,6 @@ public interface IRegisterService {
 	 * @param userInfo
 	 * @return
 	 */
-	public abstract boolean authEmail(UserInfo userInfo);
+	public abstract boolean authEmail(String email,String emailCode);
 	
 }

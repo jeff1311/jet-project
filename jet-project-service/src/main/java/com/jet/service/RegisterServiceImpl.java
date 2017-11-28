@@ -40,11 +40,11 @@ public class RegisterServiceImpl implements IRegisterService {
 	}
 
 	@Override
-	public boolean authEmail(UserInfo userInfo) {
+	public boolean authEmail(String email,String emailCode) {
 		boolean result = false;
-		UserInfo user = userInfoMapper.selectByPrimaryKey(userInfo.getId());
-		if(user!=null&&user.getEmailCode()!=null){
-			if(user.getEmailCode().equals(userInfo.getEmailCode())){
+		if(email!=null&&emailCode!=null){
+			UserInfo userInfo = userInfoMapper.selectByEmailAndEmailcode(email, emailCode);
+			if(userInfo!=null){
 				result=true;
 			}
 		}

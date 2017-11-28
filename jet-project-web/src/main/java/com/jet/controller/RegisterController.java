@@ -50,20 +50,20 @@ public class RegisterController extends BaseController{
 		response.setContentType("text/html;charset=utf-8");
 		String email = request.getParameter("email");
 		String emailCode = request.getParameter("emailCode");
-		System.out.println(email);
-		System.out.println(emailCode);
-		try {
-			request.getRequestDispatcher("jsp/index").forward(request, response);
-		} catch (ServletException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		boolean result = registerService.authEmail(email,emailCode);
+		if(result){			
+			try {
+				response.sendRedirect("http://192.168.6.237:8888/jet/image/banner/f22.jpg");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{			
+			try {
+				response.getWriter().print("油箱激活失败！");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-//		try {
-//			response.getWriter().print("油箱已激活！");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
 }
