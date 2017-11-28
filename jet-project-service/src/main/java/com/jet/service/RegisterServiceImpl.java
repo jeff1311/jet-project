@@ -20,13 +20,13 @@ public class RegisterServiceImpl implements IRegisterService {
 	public int register(String email,String password) {
 		Integer result = 0;
 		UserInfo user = userInfoMapper.selectByEmail(email);
+		String emailMD5 = DigestUtils.md5Hex(email);
 		if(user==null){			
 			try {
-				emailSenderService.send(email);
+				emailSenderService.send(email,emailMD5);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			String emailMD5 = DigestUtils.md5Hex(email);
 			UserInfo userInfo = new UserInfo();
 			userInfo.setEmail(email);
 			userInfo.setEmailCode(emailMD5);

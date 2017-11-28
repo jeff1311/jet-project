@@ -27,14 +27,14 @@ public class EmailSenderServiceImpl implements IEmailSenderService{
     public static String myEmailSMTPHost = "smtp.163.com";
 	
     @Override
-    public boolean send(String receiverEmail) throws Exception {
+    public boolean send(String receiverEmail,String emailCode) throws Exception {
     	EmailModel emailInfo = new EmailModel();
     	emailInfo.setSenderEmail(myEmailAccount);
     	emailInfo.setSenderNickName(myEmailNickName);
     	emailInfo.setReceiverEmail(receiverEmail);
     	emailInfo.setReceiverNickName("亲爱的模友");
     	emailInfo.setTitle("邮箱验证");
-    	emailInfo.setContenct("<a href=\"https://www.baidu.com\">www.baidu.com</a>");
+    	emailInfo.setContenct("<a href=\"http://192.168.6.237:8888/jet/register/authEmail?email="+receiverEmail+"&emailCode="+emailCode+"\">点击此链接激活邮箱</a>");
     	
     	// 1. 创建参数配置, 用于连接邮件服务器的参数配置
         Properties props = new Properties();                    // 参数配置

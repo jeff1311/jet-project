@@ -1,5 +1,8 @@
 package com.jet.controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,7 +47,23 @@ public class RegisterController extends BaseController{
 	 */
 	@RequestMapping(value="/register/authEmail",method=RequestMethod.GET)
 	public void authEmail(HttpServletRequest request,HttpServletResponse response){
-		
+		response.setContentType("text/html;charset=utf-8");
+		String email = request.getParameter("email");
+		String emailCode = request.getParameter("emailCode");
+		System.out.println(email);
+		System.out.println(emailCode);
+		try {
+			request.getRequestDispatcher("jsp/index").forward(request, response);
+		} catch (ServletException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+//		try {
+//			response.getWriter().print("油箱已激活！");
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 }
