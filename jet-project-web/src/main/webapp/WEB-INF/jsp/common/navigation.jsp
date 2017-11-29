@@ -101,20 +101,42 @@
 	/* background:#0088cc; */
 	/*background:linear-gradient(0deg,#02486b,#0088cc);*/
 }
+.login-form{
+	text-align:center;
+}
 .login_input{
-	margin-left:4%;
-	margin-top:4%;
+	margin-top:5%;
+	padding:5px;
 	width:90%;
-	height:40px;
-	font-family:"微软雅黑";
-	padding-left:8px;
+	height:30px;
 	border:none;
-	border-radius:1px;
-	background:#e8e8e8;
+	background:#f0f0f0;
 	outline:none;
-	appearance:none;
-	-moz-appearance:none;
-	-webkit-appearance:none;
+	transition:0.5s;
+	-moz-transition:0.5s; /* Firefox 4 */
+	-webkit-transition:0.5s; /* Safari 和 Chrome */
+	-o-transition:0.5s; /* Opera */
+}
+.login_input:FOCUS {
+	background:#dcdcdc;
+}
+.login-button{
+	margin-top:5%;
+	width:93%;
+	height:38px;
+	line-height:38px;
+	background:#0088cc;
+	color:white;
+	border:none;
+	cursor:pointer;
+	outline:none;
+	transition:0.5s;
+	-moz-transition:0.5s; /* Firefox 4 */
+	-webkit-transition:0.5s; /* Safari 和 Chrome */
+	-o-transition:0.5s; /* Opera */
+}
+.login-button:HOVER {
+	background:#009be8;
 }
 </style>
 </head>
@@ -131,7 +153,7 @@
 					<span class="nickName">jeff1311</span>
 				</c:when>
 				<c:otherwise>
-					<div id="login" class="font-link">登录</div>
+					<div id="login" class="font-link">登录 </div>
 					<div id="register" class="font-link">注册</div>
 					<a id="location" style="cursor:pointer;">锚点</a>
 				</c:otherwise>
@@ -142,21 +164,23 @@
 <script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
 <script type="text/javascript">
-var login = ['<form action="">	',
+var login = ['<form action="" class="login-form">	',
              '		<input type="text" placeholder="邮箱" class="login_input">',
              '		<input type="password" placeholder="密码" class="login_input">',
+             '		<input type="button" value="登录" class="login-button" onclick="">',
              '	</form>'].join("");
 $('#login').click(function(){
 	//自定页
 	layer.open({
-	  type: 1,
-	  title: "登陆",
-	  area: ['400px', '250px'],
-	  skin: 'layui-layer-demo', //样式类名
-	  closeBtn: 0, //不显示关闭按钮
-	  anim: 2,
+	  type: 1, //弹窗种类
+	  title: "登陆", //主题
+	  area: ['350px', '230px'], //窗口大小
+	  skin: 'login-layer', //样式类名
+	  closeBtn: 1, //不显示关闭按钮
+	  anim: 4, //动画
+	  tipsMore: true, //允许多窗口
 	  shadeClose: true, //开启遮罩关闭
-	  content: login	
+	  content: login //内容
 	});
 })
 $('#register').click(function(){	

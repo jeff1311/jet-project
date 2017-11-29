@@ -72,7 +72,7 @@ public class RegisterServiceImpl implements IRegisterService {
 				}
 			}else{
 				rm.setCode(0);
-				rm.setErrMsg("链接失效！");
+				rm.setErrMsg("链接已失效！");
 			}
 		}
 		return rm;

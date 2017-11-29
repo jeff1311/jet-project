@@ -8,7 +8,7 @@
 <style type="text/css">
 .body{
 	margin:0;
-	background:#f1f1f1;
+	background:#f0f0f0;
 }
 .register-body{
 	margin:auto;
@@ -55,7 +55,7 @@
 	height:25px;
 	padding:5px;
 	border:none;
-	background:#f1f1f1;
+	background:#f0f0f0;
 	outline:none;
 	transition:0.5s;
 	-moz-transition:0.5s; /* Firefox 4 */
@@ -64,16 +64,6 @@
 }
 .input:FOCUS{
 	background:#dcdcdc;
-}
-.input-tip{
-	margin-left:10px;
-	height:25px;
-	color:rgba(255, 0, 0, 0.8);
-}
-.input-tip-star{
-	height:25px;
-	line-height:25px;
-	color:rgba(255, 0, 0, 0.8);
 }
 .register-button{
 	margin:auto;
@@ -102,20 +92,14 @@
 			<div class="input-frame">
 				<div class="input-label">昵称：</div>			
 				<input type="text" id="nickName" name="nickName" placeholder="请输入昵称" maxlength="30" class="input">
-				<span class="input-tip-star">*</span>
-				<span class="input-tip" id="nickNameTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label">邮箱：</div>			
 				<input type="email" id="email" name="email" placeholder="请输入邮箱" maxlength="50" class="input">
-				<span class="input-tip-star">*</span>
-				<span class="input-tip" id="emailTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label">密码：</div>			
 				<input type="password" id="password" name="password" placeholder="请输入密码" maxlength="30" class="input">
-				<span class="input-tip-star">*</span>
-				<span class="input-tip" id="passwordTip"></span>
 			</div>
 			<div class="input-frame">
 				<div class="input-label"></div>
@@ -148,15 +132,22 @@ $('#register').click(function(){
 		data:$("#registerForm").serialize(),
 		dataType:'json',
 		success:function(result){
-			$('.input-tip').each(function(){//清空所有提示
-				$(this).text('');
-			})
 			if(result.code==1){
 				layer.msg("验证邮件发送成功，快登录您的邮箱完成注册吧！");
 			}else if(result.code==2){
-				$('#emailTip').text(result.errMsg);
+				layer.tips(result.errMsg, '#email' , {
+				    tips: [2, '#3595CC'],
+				    area: ['auto', '35px'],
+				    time: 3000,
+				    tipsMore:true
+				});
 			}else if(result.code==3){
-				$('#nickNameTip').text(result.errMsg);
+				layer.tips(result.errMsg, '#nickName' , {
+				    tips: [2, '#3595CC'],
+				    area: ['auto', '35px'],
+				    time: 3000,
+				    tipsMore:true
+				});
 			}
 		}
 	})
@@ -174,36 +165,58 @@ function validate(){
 	var password=$('#password');
 	if(nickName.val()==null||nickName.val()==''){
 		nickName.focus();
-		$('#nickNameTip').text("昵称不可为空！");
+		layer.tips('昵称不可为空！', '#nickName' , {
+		    tips: [2, '#3595CC'],
+		   /*  area: ['auto', '35px'], */
+		    time: 3000,
+		    tipsMore:true
+		});
 	}else{
 		nickNameResult=true;
 	}
 	if(email.val()==null||email.val()==''){
 		email.focus();
-		$('#emailTip').text("邮箱不可为空！");
+		layer.tips('邮箱不可为空！', '#email' , {
+		    tips: [2, '#3595CC'],
+		    area: ['auto', '35px'],
+		    time: 3000,
+		    tipsMore:true
+		});
 	}else{
 		if(!/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/.test(email.val())){
 			email.focus();
-			$('#emailTip').text("邮箱格式错误！");
+			layer.tips('邮箱格式错误！', '#email' , {
+			    tips: [2, '#3595CC'],
+			    time: 3000,
+			    tipsMore:true
+			});
 		}else{
 			emailResult=true;
 		}
 	}
 	if(password.val()==null||password.val()==''){
 		password.focus();
-		$('#passwordTip').text("密码不可为空！");
+		layer.tips('密码不可为空！', '#password' , {
+		    tips: [2, '#3595CC'],
+		    time: 3000,
+		    tipsMore:true
+		});
 	}else{
 		if(password.val().length<6){
 			password.focus();
-			$('#passwordTip').text("密码长度不得小于6位！");
+			layer.tips('密码长度不得小于6位！', '#password' , {
+			    tips: [2, '#3595CC'],
+			    time: 3000,
+			    tipsMore:true
+			});
 		}else{
 			passwordResult=true;
 		}
 	}
-	if(!nickNameResult||!emailResult||!passwordResult){
-		return false;
-	}else{
+	if(nickNameResult&&emailResult&&passwordResult){
 		return true;
+	}else{
+		return false;
 	}
 }
 </script>

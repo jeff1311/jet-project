@@ -9,7 +9,7 @@
 <style type="text/css">
 .body{
 	margin:0 auto;
-	background:#ececec;
+	background:#f0f0f0;
 }
 .main{
 	margin:0 auto;
@@ -17,7 +17,7 @@
 	margin-bottom:30px;
 	width:70%;
 	height:1000px;/* 100% */
-	background:white;
+	background:white;	
 }
 .banner{
 	margin:0;
