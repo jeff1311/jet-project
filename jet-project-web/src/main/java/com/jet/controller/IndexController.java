@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jet.pojo.UserInfo;
 import com.jet.service.IUserInfoService;
 
 @Controller
@@ -16,10 +15,7 @@ public class IndexController {
 	
 	@RequestMapping("index")
 	public ModelAndView index(){
-		ModelAndView mv = new ModelAndView("index");
-		UserInfo userInfo = userInfoService.getUserInfoById(1);
-		//mv.addObject("userInfo", userInfo.toString());
-		return mv;
+		return new ModelAndView("index");
 	}
 	
 }

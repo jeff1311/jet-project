@@ -22,4 +22,6 @@ public interface UserInfoMapper {
     UserInfo selectByEmail(@Param("email")String email);
     
     UserInfo selectByEmailAndEmailcode(@Param("email")String email,@Param("emailCode")String emailCode);
+    
+    UserInfo selectByEmailAndPassword(@Param("email")String email,@Param("password")String password);
 }

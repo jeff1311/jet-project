@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="./layui.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
 <style type="text/css">
 .navigation{
 	position:fixed;
@@ -138,6 +138,11 @@
 .login-button:HOVER {
 	background:#009be8;
 }
+.navi{
+	margin-left:50px;
+	height:50px;
+	line-height:50px;
+}
 </style>
 </head>
 
@@ -145,17 +150,17 @@
 	<div>
 		<span class="icon"></span>
 		<span class="com">www.jet.com</span>
-		<span class="message"></span><div class="message-tip"></div>
-		<span class="layui-breadcrumb" lay-separator="|">
-		  <a href="">论坛</a>
-		  <a href="">多旋翼</a>
-		  <a href="">无人机</a>
-		  <a href="">固定翼</a>
-		  <a href="">直升机</a>
-		  <a href="">交易区</a>
-		  <a href="">资讯</a>
+		<!-- <span class="message"></span><div class="message-tip"></div> -->
+		<span class="layui-breadcrumb navi" lay-separator="|">
+		  <a href="javascript:;" class="anchor" name="news">资讯</a>
+		  <a href="javascript:;" class="anchor" name="forum">论坛</a>
+		  <a href="javascript:;" class="anchor" name="multi-rotor">多旋翼</a>
+		  <a href="javascript:;" class="anchor" name="UAV">无人机</a>
+		  <a href="javascript:;" class="anchor" name="fixed-wing">固定翼</a>
+		  <a href="javascript:;" class="anchor" name="helicopter">直升机</a>
+		  <a href="javascript:;" class="anchor" name="market">交易区</a>
 		</span>
-		<span class="f-right">
+		<span id="userModule" class="f-right">
 			<c:choose>
 				<c:when test="${!empty userInfo }">
 					<span class="portrait"><img alt="" src="${BASE_URL }/jet/image/portrait/skull39.png"></span>
@@ -164,18 +169,20 @@
 				<c:otherwise>
 					<div id="login" class="font-link">登录 </div>
 					<div id="register" class="font-link">注册</div>
-					<a id="location" style="cursor:pointer;">锚点</a>
 				</c:otherwise>
 			</c:choose>
 		</span>
 	</div>
 </div>
+<script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
 <script type="text/javascript">
-var login = ['<form action="" class="login-form">	',
-             '		<input type="text" placeholder="邮箱" class="login_input">',
-             '		<input type="password" placeholder="密码" class="login_input">',
-             '		<input type="button" value="登录" class="login-button" onclick="">',
+var loginForm = ['<form id="loginForm" class="login-form">	',
+             '		<input type="text" name="email" placeholder="邮箱" class="login_input">',
+             '		<input type="password" name="password" placeholder="密码" class="login_input">',
+             '		<input type="button" value="登录" class="login-button" onclick="login()">',
              '	</form>'].join("");
+             
 $('#login').click(function(){
 	//自定页
 	layer.open({
@@ -185,17 +192,37 @@ $('#login').click(function(){
 	  skin: 'login-layer', //样式类名
 	  closeBtn: 1, //不显示关闭按钮
 	  anim: 4, //动画
-	  tipsMore: true, //允许多窗口
 	  shadeClose: true, //开启遮罩关闭
-	  content: login //内容
+	  content: loginForm //内容
 	});
 })
+
+function login(){	
+	$.ajax({
+		type:'post',
+		url:'${BASE_URL}/jet/login',
+		data:$('#loginForm').serialize(),
+		dataType:'json',
+		success:function(result){
+			if(result.code==1){
+				layer.closeAll();
+				var userHtml=['<span class="portrait"><img alt="" src="${BASE_URL }/jet/image/portrait/skull39.png"></span>',
+				              '<span class="nickName">jeff1311</span>'].join("");
+				$('#userModule').html(userHtml);
+			}else{
+				layer.msg(result.errMsg);
+			}
+		}
+	})
+}
+
 $('#register').click(function(){	
 	window.location="html/register.html"; 
 })
 
-$('#location').click(function(){	
-	$("html,body").animate({scrollTop: $("#bottom").offset().top}, 500);
+$('.anchor').click(function(){
+	var id=$(this).attr('name');
+	$("html,body").animate({scrollTop: $("#"+id).offset().top-60}, 100);
 })
 </script>
 </html>
