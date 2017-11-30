@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%-- <link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/css/font-awesome/css/font-awesome.min.css">
+<!--[if IE 7]>
+<link rel="stylesheet" href="${BASE_URL }/jet/css/font-awesome/css/font-awesome-ie7.min.css">
+<![endif]--> --%>
 <link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
 <style type="text/css">
 .navigation{
