@@ -4,8 +4,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<%@ include file="./layui.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
 <style type="text/css">
 .navigation{
 	position:fixed;
@@ -110,7 +110,7 @@
 	width:90%;
 	height:30px;
 	border:none;
-	background:#f0f0f0;
+	background:#f8f8f8;
 	outline:none;
 	transition:0.5s;
 	-moz-transition:0.5s; /* Firefox 4 */
@@ -118,7 +118,7 @@
 	-o-transition:0.5s; /* Opera */
 }
 .login_input:FOCUS {
-	background:#dcdcdc;
+	background:#e8e8e8;
 }
 .login-button{
 	margin-top:5%;
@@ -146,6 +146,15 @@
 		<span class="icon"></span>
 		<span class="com">www.jet.com</span>
 		<span class="message"></span><div class="message-tip"></div>
+		<span class="layui-breadcrumb" lay-separator="|">
+		  <a href="">论坛</a>
+		  <a href="">多旋翼</a>
+		  <a href="">无人机</a>
+		  <a href="">固定翼</a>
+		  <a href="">直升机</a>
+		  <a href="">交易区</a>
+		  <a href="">资讯</a>
+		</span>
 		<span class="f-right">
 			<c:choose>
 				<c:when test="${!empty userInfo }">
@@ -161,8 +170,6 @@
 		</span>
 	</div>
 </div>
-<script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
 <script type="text/javascript">
 var login = ['<form action="" class="login-form">	',
              '		<input type="text" placeholder="邮箱" class="login_input">',

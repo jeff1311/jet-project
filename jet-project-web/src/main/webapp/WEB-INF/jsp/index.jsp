@@ -9,7 +9,7 @@
 <style type="text/css">
 .body{
 	margin:0 auto;
-	background:#f0f0f0;
+	background:#f8f8f8;
 }
 .main{
 	margin:0 auto;
