@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -49,7 +51,7 @@ public class InitConfig implements ServletContextListener{
 		
 		final List<HttpSession> sessions = Collections.synchronizedList(new ArrayList<HttpSession>());
 		application.setAttribute("sessions", sessions);
-//		//开启一个定时任务 删除过期的session   5秒
+		//开启一个定时任务 删除过期的session   5秒
 //		Timer t = new Timer();
 //		t.schedule(new TimerTask() {
 //			@Override
@@ -62,7 +64,7 @@ public class InitConfig implements ServletContextListener{
 //					if(time > 5000){
 //						System.out.println("--------------清空session:"+session.getId()+"--------------");
 //						session.invalidate();
-//						sessionList.remove(session);
+//						iterator.remove();
 //					}
 //				}
 //			}
