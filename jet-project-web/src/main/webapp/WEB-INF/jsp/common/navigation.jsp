@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<%-- <link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/css/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/plugin/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/plugin/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--[if IE 7]>
 <link rel="stylesheet" href="${BASE_URL }/jet/css/font-awesome/css/font-awesome-ie7.min.css">
-<![endif]--> --%>
-<link rel="stylesheet" type="text/css" href="${BASE_URL }/jet/js/layer/css/layui.css">
+<![endif]-->
 <style type="text/css">
 .navigation{
 	position:fixed;
@@ -169,7 +169,7 @@
 			<c:choose>
 				<c:when test="${!empty userInfo }">
 					<span class="portrait"><img alt="" src="${BASE_URL }/jet/image/portrait/skull39.png"></span>
-					<span class="nickName">jeff1311</span>
+					<span class="nickName">${userInfo.nickName }</span>
 				</c:when>
 				<c:otherwise>
 					<div id="login" class="font-link">登录 </div>
@@ -179,7 +179,7 @@
 		</span>
 	</div>
 </div>
-<script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${BASE_URL }/jet/js/common/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="${BASE_URL }/jet/js/layer/layui.all.js"></script>
 <script type="text/javascript">
 var loginForm = ['<form id="loginForm" class="login-form">	',
